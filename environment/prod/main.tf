@@ -227,7 +227,7 @@ module "ecs_service" {
   security_group_ids = [
     module.allow_all_sg.id
   ]
-  scheduling_strategy = "DAEMON"
+  scheduling_strategy = "REPLICA"
   subnet_ids          = module.subnets.private_subnet_ids
   service_role_arn    = "AWSServiceRoleForECS"
   volumes = [
