@@ -3,9 +3,9 @@ package routes
 import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	ServerConfig "bitbucket.org/codapayments/coda-stack-management-app/config"
-	HealthHandler "bitbucket.org/codapayments/coda-stack-management-app/internal/handlers/health"
-	"bitbucket.org/codapayments/coda-stack-management-app/internal/repository/adapter"
+	ServerConfig "github.com/junydania/pppro/hello-app/config"
+	HelloHandler "github.com/junydania/pppro/hello-app/internal/handlers/hello"
+	"github.com/junydania/pppro/hello-app/internal/repository/adapter"
 )
 
 type Router struct {
@@ -22,7 +22,7 @@ func NewRouter() *Router {
 
 func (r *Router) SetRouters(repository adapter.Interface) *chi.Mux {
 	r.setConfigsRouters()
-	r.RouterDefault(repository)
+	r.RouterHello(repository)
 
 	return r.router
 }
@@ -36,14 +36,12 @@ func (r *Router) setConfigsRouters() {
 	r.EnableRealIP()
 }
 
-func (r *Router) DefaultHealth(repository adapter.Interface) {
-	handler := DefaultHandler.NewHandler(repository)
+func (r *Router) RouterHello(repository adapter.Interface) {
+	handler := HelloHandler.NewHandler(repository)
 
 	r.router.Route("/", func(route chi.Router) {
 		route.Post("/", handler.Post)
 		route.Get("/", handler.Get)
-		route.Put("/", handler.Put)
-		route.Delete("/", handler.Delete)
 		route.Options("/", handler.Options)
 	})
 }

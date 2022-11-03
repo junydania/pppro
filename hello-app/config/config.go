@@ -1,7 +1,7 @@
 package config
 
 import (
-	"bitbucket.org/codapayments/coda-stack-management-app/utils/env"
+	"github.com/junydania/pppro/hello-app/utils/env"
 	"strconv"
 )
 
@@ -28,7 +28,7 @@ func GetConfig() Config {
 
 func parseEnvToInt(envName, defaultValue string) int {
 	num, err := strconv.Atoi(env.GetEnv(envName, defaultValue))
-	
+
 	if err != nil {
 		return 0
 	}

@@ -1,7 +1,7 @@
 package instance
 
 import (
-	stackConfig "bitbucket.org/codapayments/coda-stack-management-app/config"
+	stackConfig "github.com/junydania/pppro/hello-app/config"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
@@ -22,7 +22,7 @@ func GetConnection() *dynamodb.Client {
 		region = configs.Region
 		endpoint = "https://dynamodb." + region + ".amazonaws.com"
 	}
-	
+
 	customResolver := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
 		return aws.Endpoint{
 			PartitionID:   "aws",
@@ -37,7 +37,7 @@ func GetConnection() *dynamodb.Client {
 		panic(err)
 	}
 
-	// Create DynamoDB client 
+	// Create DynamoDB client
 	svc := dynamodb.NewFromConfig(cfg)
 
 	// Create DynamoDB client

@@ -18,61 +18,23 @@ To start the project run the command:
 go run cmd/app/main.go
 ```
 You can see in your terminal this log:
-`service running on port  :8080`
+`service running on port  :8082`
 
 ## Usage
 
-### Health
-This route return life of the project
-```text
-    GET - http://localhost:8080/health
-```
+### Hello
 
 ### Get_All
-This route return all workspace data in your database
+This route return all hello message written into the database
 ```text
-    GET - http://localhost:8080/workspace
-```
-
-#### Get_One
-This route return specific data in your database
-```text
-    GET - http://localhost:8080/workspace/{ID}
+    GET - http://localhost:8082
 ```
 
 #### Post
 This route creates an item in the database
 ```text
-    POST - http://localhost:8080/workspace
+    POST - http://localhost:8082
     {
-        "name": "zain-workspace705",
-        "account_name": "coda-payment",
-        "stack_name": "codapay",
-        "region": "us-west-1",
-        "uptime_hours": 0,
-        "workspace_details": {
-            "instance_id": "i-223232323888995552",
-            "instance_ip": "10.12.33.19",
-            "security_groups": ["sg-984884848", "sg-232323232"],
-            "subnet_ids": ["subnet-049494", "subnet-9044543"],
-            "username": "odania",
-            "vpc_id": "vpc-sds782737237"
-        }
+        "content": "Hello World"
     }
-```
-
-#### Put
-This route updates a workspace in the database
-```text
-    PUT - http://localhost:8080/workspace/{ID}
-    
-    {
-        "name": "workspace1"
-    }
-```
-
-#### Delete
-This route removes a workspace from the database
-```text
-    DELETE - http://localhost:8080/workspace/{ID}
 ```

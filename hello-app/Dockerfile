@@ -12,7 +12,7 @@ RUN go mod download
 COPY . .
 
 # Build the Go app
-RUN go build -ldflags="-s -w" -o stackapi cmd/app/main.go
+RUN go build -ldflags="-s -w" -o helloapp cmd/app/main.go
 
 # Start fresh from a smaller image
 FROM alpine:3.16
@@ -20,10 +20,10 @@ FROM alpine:3.16
 RUN apk update && apk upgrade && apk add ca-certificates curl git bash \
 iputils busybox-extras
 
-COPY --from=build_base /build/stackapi /app/stackapi
+COPY --from=build_base /build/helloapp /app/helloapp
 
 # This container exposes port 8082 to the outside world
 EXPOSE 8082
 
 # Run the binary program produced by `go install`
-CMD ["/app/stackapi"]
+CMD ["/app/helloapp"]
