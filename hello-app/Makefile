@@ -1,5 +1,5 @@
 SHELL := /bin/bash -o pipefail
-PPRO_SERVICE=hello-app
+PPRO_SERVICE=pppro-hello
 PPRO_REPO=""
 BRANCH=$(shell git rev-parse --abbrev-ref HEAD | sed 's/\//-/g') # get branch name and replace forward-slashes
 
