@@ -1,7 +1,7 @@
 locals {
   ecr_names = {
-    "xapo-build" = {
-      image_names           = ["xapo-build"]
+    "pppro-build" = {
+      image_names           = ["pppro-build"]
       scan_images_on_push   = false
       untagged_description  = "Delete untagged images for operator"
       untagged_count_type   = "sinceImagePushed"

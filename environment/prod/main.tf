@@ -5,7 +5,7 @@ provider "aws" {
 
 locals {
   region = "us-east-1"
-  name   = "ecs-xapo-app"
+  name   = "ecs-pppro-app"
 
   user_data = <<-EOT
     #!/bin/bash
@@ -165,10 +165,10 @@ module "container_definition" {
   container_cpu    = 1024
   environment      = []
   essential        = true
-  container_image  = "${module.ecr.xapo-build.repository_url}:latest"
+  container_image  = "${module.ecr.pppro-build.repository_url}:latest"
   container_memory = 2048
   entrypoint       = []
-  container_name   = "xapo-rest"
+  container_name   = "pppro-rest"
   log_configuration = {
     logDriver = "awslogs"
     options = {
@@ -202,7 +202,7 @@ module "container_definition" {
   mount_points = [
     {
       containerPath = "/bitcoin/data"
-      sourceVolume  = "xapo-efs"
+      sourceVolume  = "pppro-efs"
       readOnly      = false
     }
   ]
@@ -214,7 +214,7 @@ module "ecs_service" {
   source                    = "../../ecs-service"
   container_definition_json = module.container_definition.json_map_encoded_list
   ecs_cluster_name          = module.ecs.cluster_name
-  ecs_family_name           = "task-xapo-app"
+  ecs_family_name           = "task-pppro-app"
   launch_type               = "EC2"
   enable_ecs_managed_tags   = true
   region                    = "us-east-1"
@@ -223,7 +223,7 @@ module "ecs_service" {
   task_cpu                  = 1048
   task_memory               = 2048
   ecs_load_balancers        = []
-  ecs_service_name          = "xapo-bitcoin"
+  ecs_service_name          = "pppro-bitcoin"
   security_group_ids = [
     module.allow_all_sg.id
   ]
@@ -233,7 +233,7 @@ module "ecs_service" {
   volumes = [
     {
       host_path                   = ""
-      name                        = "xapo-efs"
+      name                        = "pppro-efs"
       docker_volume_configuration = []
       efs_volume_configuration = [
         {
