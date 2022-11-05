@@ -42,7 +42,7 @@ resource "aws_ecs_service" "ignore_changes_desired_count" {
       container_port = lookup(service_registries.value, "container_port", null)
     }
   }
-  
+
   dynamic "ordered_placement_strategy" {
     for_each = var.ordered_placement_strategy
     content {

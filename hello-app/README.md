@@ -1,8 +1,7 @@
-# Stack Management API
+# PPPRO Hello App
 
-API for storing workspace details and provider details in DynamoDB
+PPRO Hello App project
 
-## Getting Started
 ### Pre-requirements
 In your machine install [AWS-CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) and [CONFIGURE](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) to save configuration of the your database
 

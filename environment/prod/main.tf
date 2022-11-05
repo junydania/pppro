@@ -1,4 +1,5 @@
 
+
 provider "aws" {
   region = "us-east-1"
 }
@@ -165,7 +166,7 @@ module "container_definition" {
   container_cpu    = 1024
   environment      = []
   essential        = true
-  container_image  = "${module.ecr.pppro-build.repository_url}:latest"
+  container_image  = "${module.ecr.pppro-hello.repository_url}:latest"
   container_memory = 2048
   entrypoint       = []
   container_name   = "pppro-rest"
@@ -183,8 +184,7 @@ module "container_definition" {
     }
   }
   map_environment = {
-    "BTC_RPCUSER" = "user"
-    "BTC_TXINDEX" = "1"
+    "ENV" = "production"
   }
 
   port_mappings = [
@@ -197,13 +197,6 @@ module "container_definition" {
       containerPort = 8333
       hostPort      = 8333
       protocol      = "tcp"
-    }
-  ]
-  mount_points = [
-    {
-      containerPath = "/bitcoin/data"
-      sourceVolume  = "pppro-efs"
-      readOnly      = false
     }
   ]
   depends_on = [module.ecr]
@@ -230,45 +223,4 @@ module "ecs_service" {
   scheduling_strategy = "REPLICA"
   subnet_ids          = module.subnets.private_subnet_ids
   service_role_arn    = "AWSServiceRoleForECS"
-  volumes = [
-    {
-      host_path                   = ""
-      name                        = "pppro-efs"
-      docker_volume_configuration = []
-      efs_volume_configuration = [
-        {
-          file_system_id          = module.efs.id
-          root_directory          = "/"
-          transit_encryption      = "ENABLED"
-          transit_encryption_port = 2999
-          authorization_config    = []
-        }
-      ]
-    }
-  ]
-}
-
-module "efs" {
-  source = "../../efs"
-
-  region                        = local.region
-  vpc_id                        = module.vpc.vpc_id
-  subnets                       = module.subnets.private_subnet_ids
-  associated_security_group_ids = module.allow_all_sg.id
-
-  access_points = {
-    "data" = {
-      posix_user = {
-        gid            = "1001"
-        uid            = "5000"
-        secondary_gids = "1002,1003"
-      }
-      creation_info = {
-        gid         = "1001"
-        uid         = "5000"
-        permissions = "0755"
-      }
-    }
-  }
-  transition_to_ia = ["AFTER_7_DAYS"]
 }

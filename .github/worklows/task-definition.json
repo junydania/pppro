@@ -1,0 +1,27 @@
+{
+  "requiresCompatibilities": [
+      "FARGATE"
+  ],
+  "inferenceAccelerators": [],
+  "containerDefinitions": [
+      {
+          "name": "<TASK DEFINITION NAME>",
+          "image": "<IMAGE>",
+          "resourceRequirements": null,
+          "essential": true,
+          "portMappings": [
+              {
+                  "containerPort": "8082",
+                  "protocol": "tcp"
+              }
+
+          ]
+      }
+  ],
+  "volumes": [],
+  "networkMode": "awsvpc",
+  "executionRoleArn": "<EXECUTION_ROLE_ARN>",
+  "family": "<TASK_DEFINITION_FAMILY>",
+  "taskRoleArn": "",
+  "placementConstraints": []
+}

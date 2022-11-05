@@ -19,7 +19,7 @@ func GetConfig() Config {
 	return Config{
 		Port:        parseEnvToInt("PORT", "8082"),
 		Timeout:     parseEnvToInt("TIMEOUT", "30"),
-		Region: env.GetEnv("REGION", "ap-southeast-1"),
+		Region: env.GetEnv("REGION", "eu-central-1"),
 		Environment: env.GetEnv("ENV", "development"),
 		DB_HOST: env.GetEnv("DB_HOST", "localhost"),
 		DB_PORT: env.GetEnv("DB_PORT", "8000"),
